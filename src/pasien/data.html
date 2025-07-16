@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIMRS - Data Pasien</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+    <!-- Sidebar -->
+    <div class="fixed inset-y-0 left-0 w-64 bg-white shadow-lg border-r border-gray-200">
+        <div class="p-6">
+            <div class="flex items-center">
+                <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center mr-3">
+                    <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                </div>
+                <span class="text-xl font-bold text-gray-800">SIMRS</span>
+            </div>
+        </div>
+        
+        <nav class="mt-8">
+            <div class="px-6 py-2">
+                <div class="flex items-center text-blue-600 bg-blue-50 px-3 py-2 rounded-lg">
+                    <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/>
+                    </svg>
+                    <span class="font-medium">Dashboard</span>
+                </div>
+            </div>
+            
+            <div class="px-6 py-2 mt-2">
+                <div class="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-3">PAGES</div>
+                <div class="space-y-1">
+                    <a href="#" class="flex items-center text-gray-700 hover:text-blue-600 hover:bg-blue-50 px-3 py-2 rounded-lg">
+                        <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/>
+                        </svg>
+                        <span>Users</span>
+                    </a>
+                    <a href="#" class="flex items-center text-gray-700 hover:text-blue-600 hover:bg-blue-50 px-3 py-2 rounded-lg">
+                        <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd"/>
+                        </svg>
+                        <span>User Profile</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="ml-64 min-h-screen">
+        <!-- Header -->
+        <div class="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center">
+                <button class="md:hidden mr-4" onclick="toggleSidebar()">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="flex items-center">
+                <div class="flex items-center mr-4">
+                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd"/>
+                    </svg>
+                    <span class="text-gray-700">Admin</span>
+                </div>
+                <button class="text-gray-400 hover:text-gray-600" onclick="toggleDropdown()">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Content Area -->
+        <div class="p-6">
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+                <!-- Header Section -->
+                <div class="px-6 py-4 border-b border-gray-200">
+                    <div class="flex items-center justify-between">
+                        <h1 class="text-2xl font-bold text-gray-800">DATA PASIEN</h1>
+                        <div class="flex space-x-3">
+                            <a href="tambah.html"><button class="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors" onclick="showAddPatientModal()">
+                                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"/>
+                                </svg>
+                                Tambah Pasien
+                            </button>
+                            </a>
+                            <button class="flex items-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors" onclick="exportData()">
+                                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                </svg>
+                                Ekspor
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filter Section -->
+                <div class="px-6 py-4 border-b border-gray-200">
+                    <div class="grid grid-cols-1 md:grid-cols-5 gap-4 mb-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">STATUS</label>
+                            <select class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" onchange="filterData()">
+                                <option value="">Pilih Status</option>
+                                <option value="aktif">Aktif</option>
+                                <option value="tidak-aktif">Tidak Aktif</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">PENJAMIN</label>
+                            <select class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" onchange="filterData()">
+                                <option value="">Semua Penjamin</option>
+                                <option value="UMUM">UMUM</option>
+                                <option value="BPJS">BPJS</option>
+                                <option value="Asuransi">Asuransi</option>
+                                <option value="Jasa Raharja">Jasa Raharja</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">JENIS KELAMIN</label>
+                            <select class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" onchange="filterData()">
+                                <option value="">Semua</option>
+                                <option value="P">PEREMPUAN</option>
+                                <option value="L">LAKI-LAKI</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">TANGGAL MASUK</label>
+                            <div class="relative">
+                                <input type="date" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" onchange="filterData()">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">CARI</label>
+                            <div class="relative">
+                                <input type="text" class="w-full px-4 py-2 pl-10 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Cari pasien..." onkeyup="searchPatients(this.value)">
+                                <svg class="absolute left-3 top-2.5 w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Table Section -->
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">NO. RM</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">NAMA PASIEN</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">NIK</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">UMUR</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">JK</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">NO TELP</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">PENJAMIN</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">STATUS</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">AKSI</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200" id="patientTableBody">
+                            <!-- Sample Data -->
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">000001</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Hana Qurratu A'yun</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">3302207705080003</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">17 th</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">L</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">08123456889</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">BPJS</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="px-2 py-1 text-xs font-medium bg-green-100 text-green-800 rounded-full">Aktif</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                    <div class="relative">
+                                        <button class="text-gray-400 hover:text-gray-600" onclick="toggleActionDropdown(this)">
+                                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                                <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"/>
+                                            </svg>
+                                        </button>
+                                        <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-200 hidden z-10">
+                                            <div class="py-1">
+                                                <a href="javascript:void(0)" onclick="showDetailModal('000001')" class="flex items-center px-4 py-2 text-sm text-gray-600 hover:bg-gray-100">
+                                                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                                        <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>
+                                                        <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/>
+                                                    </svg>
+                                                    Lihat
+                                                </a>
+                                                <a href="#" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" onclick="editPatient('000001')">
+                                                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                                        <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/>
+                                                    </svg>
+                                                    Edit
+                                                </a>
+                                                <a href="#" class="flex items-center px-4 py-2 text-sm text-red-600 hover:bg-red-50" onclick="deletePatient('000001')">
+                                                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                                        <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                                                    </svg>
+                                                    Hapus
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Overlay -->
+                    <div id="popupModal" class="fixed inset-0 z-50 bg-black/50 flex items-center justify-center hidden">
+                    <!-- Modal Content -->
+                    <div class="bg-white rounded-xl p-6 w-full max-w-sm text-center shadow-lg">
+                        <!-- Icon -->
+                        <div class="flex justify-center mb-4">
+                        <svg class="w-8 h-8 text-yellow-500" fill="none" stroke="currentColor" stroke-width="2"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M12 9v2m0 4h.01M4.93 4.93l14.14 14.14M19.07 4.93L4.93 19.07" />
+                        </svg>
+                        </div>
+
+                        <!-- Title -->
+                        <h2 class="text-lg font-semibold text-gray-900">Anda Yakin Akan Menghapus Data Pasien Ini?</h2>
+                        <p class="text-sm text-gray-500 mt-1">Aksi ini akan menghapus Data Pasien dari Database</p>
+
+                        <!-- Buttons -->
+                        <div class="mt-6 flex justify-center gap-4">
+                        <button onclick="closeModal()" class="px-6 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium">Cancel</button>
+                        <button onclick="hapusPasien()" class="px-6 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium">Hapus</button>
+                        </div>
+                    </div>
+                    </div>
+                <!-- Pagination -->
+                <div class="px-6 py-4 border-t border-gray-200">
+                    <div class="flex items-center justify-between">
+                        <div class="text-sm text-gray-700">
+                            Menampilkan <span id="showingStart">1</span> sampai <span id="showingEnd">10</span> dari <span id="totalRecords">20</span> data
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <button class="px-3 py-1 border border-gray-300 rounded-md text-sm hover:bg-gray-50" onclick="changePage(-1)">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                            </button>
+                            <div id="paginationNumbers" class="flex space-x-1">
+                                <button class="px-3 py-1 bg-blue-600 text-white rounded-md text-sm">1</button>
+                                <button class="px-3 py-1 border border-gray-300 rounded-md text-sm hover:bg-gray-50">2</button>
+                                <button class="px-3 py-1 border border-gray-300 rounded-md text-sm hover:bg-gray-50">3</button>
+                            </div>
+                            <button class="px-3 py-1 border border-gray-300 rounded-md text-sm hover:bg-gray-50" onclick="changePage(1)">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div id="modalDetailPasien" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden justify-center items-center">
+                <div class="bg-white rounded-lg shadow-lg w-full max-w-4xl p-8 relative">
+                    <!-- Isi modal -->
+                    <h2 id="modalNamaPasien" class="text-xl font-bold mb-2">NY. Nama Pasien</h2>
+                    <p class="text-sm text-gray-500 mb-6">NRM. <span id="modalNRM">000000</span> | Terdaftar: <span id="modalTerdaftar">-</span></p>
+
+                    <div class="grid grid-cols-2 gap-6 text-sm">
+                        <div>
+                            <p><strong>NIK:</strong> <span id="modalNIK"></span></p>
+                            <p><strong>Tanggal Lahir:</strong> <span id="modalTglLahir"></span></p>
+                            <p><strong>Tempat Lahir:</strong> <span id="modalTempatLahir"></span></p>
+                            <p><strong>Jenis Kelamin:</strong> <span id="modalJK"></span></p>
+                            <p><strong>No. Telp PJ:</strong> <span id="modalTelpPJ"></span></p>
+                            <p><strong>Golongan Darah:</strong> <span id="modalGolDarah"></span></p>
+                            <p><strong>Status Nikah:</strong> <span id="modalStatusNikah"></span></p>
+                            <p><strong>Pekerjaan:</strong> <span id="modalPekerjaan"></span></p>
+                            <p><strong>Catatan Khusus:</strong> <span id="modalCatatan"></span></p>
+                            <p><strong>Alamat:</strong> <span id="modalAlamat"></span></p>
+                        </div>
+                        <div>
+                            <p><strong>Penanggung Jawab:</strong> <span id="modalPJ"></span></p>
+                            <p><strong>Nama PJ:</strong> <span id="modalNamaPJ"></span></p>
+                            <p><strong>Pekerjaan PJ:</strong> <span id="modalPekerjaanPJ"></span></p>
+                            <p><strong>Penjamin:</strong> <span id="modalPenjamin"></span></p>
+                            <p><strong>Nama Instansi:</strong> <span id="modalInstansi"></span></p>
+                            <p><strong>No. Surat Penjamin:</strong> <span id="modalSurat"></span></p>
+                            <p><strong>Asal Rujukan:</strong> <span id="modalAsalRujukan"></span></p>
+                            <p><strong>No. Surat Rujukan:</strong> <span id="modalNoRujukan"></span></p>
+                            <p><strong>Riwayat Kunjungan:</strong> <span id="modalKunjungan"></span></p>
+                            <p><strong>Layanan Terakhir:</strong> <span id="modalLayanan"></span></p>
+                        </div>
+                        </div>
+                        <div class="flex justify-end mt-6 space-x-2">
+                        <button onclick="window.print()" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">🖨️ Print Data</button>
+                        <button onclick="closeDetailModal()" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">Tutup</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        let selectedPatientId = null;
+
+        function deletePatient(id) {
+            selectedPatientId = id;
+            openModal();
+        }
+
+        function hapusPasien() {
+            if (selectedPatientId) {
+            const data = JSON.parse(localStorage.getItem("dataPasienList") || "[]");
+
+            const updated = data.filter(p => p.nrm !== selectedPatientId);
+
+            localStorage.setItem("dataPasienList", JSON.stringify(updated));
+
+            closeModal();
+
+            location.reload();
+            }
+        }
+
+        function openModal() {
+            document.getElementById("popupModal").classList.remove("hidden");
+        }
+
+        function closeModal() {
+            document.getElementById("popupModal").classList.add("hidden");
+        }
+        function toggleActionDropdown(button) {
+            const dropdown = button.nextElementSibling;
+            const isOpen = !dropdown.classList.contains("hidden");
+
+            
+            document.querySelectorAll('.relative > .absolute').forEach(d => d.classList.add('hidden'));
+
+            
+            if (!isOpen) {
+            dropdown.classList.remove("hidden");
+            }
+        }
+
+        document.addEventListener('click', function(event) {
+            const isClickInside = event.target.closest('.relative');
+            if (!isClickInside) {
+            document.querySelectorAll('.relative > .absolute').forEach(d => d.classList.add('hidden'));
+            }
+        });
+        function showDetailModal(nrm) {
+            const dataList = JSON.parse(localStorage.getItem("dataPasienList") || "[]");
+            const pasien = dataList.find(p => p.nrm === nrm);
+
+            if (!pasien) return alert("Data tidak ditemukan");
+
+            // Isi data modal
+            document.getElementById("modalNamaPasien").innerText = "NY. " + pasien.nama;
+            document.getElementById("modalNRM").innerText = pasien.nrm;
+            document.getElementById("modalTerdaftar").innerText = "25 Juni 2017"; // Simpan kalau kamu punya datanya
+            document.getElementById("modalNIK").innerText = pasien.nik;
+            document.getElementById("modalTglLahir").innerText = pasien.tanggalLahir;
+            document.getElementById("modalTempatLahir").innerText = pasien.tempatLahir;
+            document.getElementById("modalJK").innerText = pasien.jenisKelamin === "L" ? "Laki-laki" : "Perempuan";
+            document.getElementById("modalTelpPJ").innerText = pasien.noTelpPJ || "-";
+            document.getElementById("modalGolDarah").innerText = pasien.golonganDarah || "-";
+            document.getElementById("modalStatusNikah").innerText = pasien.statusNikah || "-";
+            document.getElementById("modalPekerjaan").innerText = pasien.pekerjaan;
+            document.getElementById("modalCatatan").innerText = pasien.catatanKhusus || "-";
+            document.getElementById("modalAlamat").innerText = pasien.alamat;
+
+            // Kanan
+            document.getElementById("modalPJ").innerText = pasien.penanggungJawab;
+            document.getElementById("modalNamaPJ").innerText = pasien.namaPJ || "-";
+            document.getElementById("modalPekerjaanPJ").innerText = pasien.pekerjaanPJ || "-";
+            document.getElementById("modalPenjamin").innerText = pasien.penjamin;
+            document.getElementById("modalInstansi").innerText = pasien.nama_instansi || "-";
+            document.getElementById("modalSurat").innerText = pasien.nomor_surat || "-";
+            document.getElementById("modalAsalRujukan").innerText = pasien.asalRujukan || "-";
+            document.getElementById("modalNoRujukan").innerText = pasien.noRujukan || "-";
+            document.getElementById("modalKunjungan").innerText = pasien.kunjunganTerakhir || "-";
+            document.getElementById("modalLayanan").innerText = pasien.layananTerakhir || "-";
+
+            // Tampilkan modal
+            document.getElementById("modalDetailPasien").classList.remove("hidden");
+            document.getElementById("modalDetailPasien").classList.add("flex");
+        }
+
+        function closeDetailModal() {
+            document.getElementById("modalDetailPasien").classList.remove("flex");
+            document.getElementById("modalDetailPasien").classList.add("hidden");
+        }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SIMRS - Edit Data Pasien</title>
+  <link rel="stylesheet" href="/src/assets/css/style.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+  <!-- Sidebar -->
+  <div class="fixed inset-y-0 left-0 w-64 bg-white shadow-lg border-r border-gray-200">
+    <div class="p-6">
+      <div class="flex items-center">
+        <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center mr-3">
+          <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </div>
+        <span class="text-xl font-bold text-gray-800">SIMRS</span>
+      </div>
+    </div>
+    <nav class="mt-8">
+      <div class="px-6 py-2">
+        <div class="flex items-center text-blue-600 bg-blue-50 px-3 py-2 rounded-lg">
+          <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/>
+          </svg>
+          <span class="font-medium">Dashboard</span>
+        </div>
+      </div>
+      <div class="px-6 py-2 mt-2">
+        <div class="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-3">PAGES</div>
+        <div class="space-y-1">
+          <a href="#" class="flex items-center text-gray-700 hover:text-blue-600 hover:bg-blue-50 px-3 py-2 rounded-lg">
+            <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/>
+            </svg>
+            <span>Users</span>
+          </a>
+          <a href="#" class="flex items-center text-gray-700 hover:text-blue-600 hover:bg-blue-50 px-3 py-2 rounded-lg">
+            <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd"/>
+            </svg>
+            <span>User Profile</span>
+          </a>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Main Content -->
+  <div class="ml-64 min-h-screen">
+    <!-- Header -->
+    <div class="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center">
+        <button class="md:hidden mr-4" onclick="toggleSidebar()">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+      <div class="flex items-center">
+        <div class="flex items-center mr-4">
+          <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd"/>
+          </svg>
+          <span class="text-gray-700">Admin</span>
+        </div>
+        <button class="text-gray-400 hover:text-gray-600" onclick="toggleDropdown()">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Halaman Form -->
+    <div class="p-6">
+      <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+        <!-- Header Section -->
+        <div class="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
+          <h1 class="text-2xl font-bold text-gray-800"> EDIT DATA PASIEN</h1>
+        </div>
+
+        <!-- Formulir Pasien -->
+        <div class="p-6">
+          <form class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Kolom Kiri -->
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">NRM</label>
+                                <input type="text" id="nrm" name="nrm" value="023778" readonly class="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-100 text-gray-500">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">NIK</label>
+                                <input type="text" id="nik" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Contoh: 3302245811240004">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Nama Pasien</label>
+                                <input type="text" id="namaPasien" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Nama lengkap pasien">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Tempat/ Tgl. Lahir</label>
+                                <div class="flex space-x-2">
+                                    <input type="text" id="tempatLahir" class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Contoh: Banyumas">
+                                    <input type="date" id="tanggalLahir" class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" value="2004-06-18">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Jenis Kelamin</label>
+                                <div class="flex space-x-6">
+                                    <label class="flex items-center">
+                                        <input type="radio" name="jenisKelamin" value="L" class="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500">
+                                        <span class="ml-2 text-sm text-gray-700">Laki - laki</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="jenisKelamin" value="P" class="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500">
+                                        <span class="ml-2 text-sm text-gray-700">Perempuan</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Pekerjaan</label>
+                                <input type="text" id="pekerjaan" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Dokter">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Golongan Darah</label>
+                                <select id="golonganDarah" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    <option value="">Pilih golongan darah</option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="AB">AB</option>
+                                    <option value="O">O</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Penanggung Jawab</label>
+                                <select id="penanggungJawab" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    <option value="">Pilih penanggung jawab</option>
+                                    <option value="Anak">Anak</option>
+                                    <option value="Orang Tua">Orang Tua</option>
+                                    <option value="Suami/Istri">Suami/Istri</option>
+                                    <option value="Saudara">Saudara</option>
+                                    <option value="Diri Sendiri">Diri Sendiri</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Nama PJ</label>
+                                <input type="text" id="namaPJ" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Nama Penanggung Jawab">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Pekerjaan PJ</label>
+                                <input type="text" id="pekerjaanPJ" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Pekerjaan Penanggung Jawab">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">No. Telp PJ</label>
+                                <input type="text" id="noTelpPJ" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Contoh: 089276256345">
+                            </div>
+                        </div>
+
+                        <!-- Kolom Kanan -->
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Alamat</label>
+                                <textarea id="alamat" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Alamat lengkap pasien"></textarea>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Provinsi</label>
+                                    <select id="provinsi" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                        <option value="">Pilih provinsi</option>
+                                        <option value="Jawa Tengah">Jawa Tengah</option>
+                                        <option value="Jawa Barat">Jawa Barat</option>
+                                        <option value="Jawa Timur">Jawa Timur</option>
+                                        <option value="DKI Jakarta">DKI Jakarta</option>
+                                        <option value="Bali">Bali</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Kabupaten/Kota</label>
+                                    <select id="kabupaten" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                        <option value="">Pilih kabupaten/kota</option>
+                                        <option value="Banyumas">Banyumas</option>
+                                        <option value="Purwokerto">Purwokerto</option>
+                                        <option value="Cilacap">Cilacap</option>
+                                        <option value="Kebumen">Kebumen</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Kecamatan</label>
+                                    <select id="kecamatan" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                        <option value="">Pilih kecamatan</option>
+                                        <option value="Jawa Tengah">Jawa Tengah</option>
+                                        <option value="Purwokerto Utara">Purwokerto Utara</option>
+                                        <option value="Purwokerto Selatan">Purwokerto Selatan</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Kode Pos</label>
+                                    <input type="text" id="kodePos" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="53182">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Penjamin</label>
+                                <select id="penjamin" onchange="handlePenjaminChange()" class="w-full px-3 py-2 border rounded">
+                                    <option value="">Pilih Penjamin</option>
+                                    <option value="UMUM">UMUM</option>
+                                    <option value="BPJS">BPJS</option>
+                                    <option value="Asuransi">Asuransi</option>
+                                    <option value="Instansi">Instansi</option>
+                                    <option value="Jasa Raharja">Jasa Raharja</option>
+                                </select>
+                            </div>
+                            
+                            <div id="bpjs-fields" class="mt-4 hidden">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Nomor BPJS</label>
+                                <input type="text" name="nomor_bpjs" class="w-full px-3 py-2 border rounded" placeholder="Masukkan No. BPJS">
+                            </div>
+
+            
+                            <div id="asuransi-fields" class="mt-4 hidden">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Nama Asuransi</label>
+                                <input type="text" name="nama_asuransi" class="w-full px-3 py-2 border rounded" placeholder="Masukkan Nama Asuransi">
+
+                                <label class="block text-sm font-medium text-gray-700 mt-2 mb-1">Nomor Asuransi</label>
+                                <input type="text" name="nomor_asuransi" class="w-full px-3 py-2 border rounded" placeholder="Masukkan Nomor Asuransi">
+                            </div>
+
+                           
+                            <div id="instansi-fields" class="mt-4 hidden">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Nama Instansi</label>
+                                <input type="text" name="nama_instansi" class="w-full px-3 py-2 border rounded" placeholder="Masukkan Nama Instansi">
+
+                                <label class="block text-sm font-medium text-gray-700 mt-2 mb-1">Nomor Surat Penjamin</label>
+                                <input type="text" name="nomor_surat" class="w-full px-3 py-2 border rounded" placeholder="Masukkan Nomor Surat">
+                            </div>
+
+                            <div id="jasaraharja-fields" class="mt-4 hidden">
+                                <label class="block text-sm font-medium text-gray-700 mt-2 mb-1">Nomor Peserta</label>
+                                <input type="text" name="nomor_surat" class="w-full px-3 py-2 border rounded" placeholder="Masukkan Nomor Peserta">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Cara Masuk</label>
+                                <select id="caraMasuk" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    <option value="">Pilih cara masuk</option>
+                                    <option value="Rujukan">Rujukan</option>
+                                    <option value="Datang Sendiri">Non Rujukan</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">No. Rujukan</label>
+                                <input type="text" id="noRujukan" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Contoh: 1234567890123">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Catatan Khusus</label>
+                                <textarea id="catatanKhusus" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Catatan khusus mengenai pasien..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tombol Aksi -->
+                    <div class="flex justify-end space-x-4 pt-6 border-t border-gray-200">
+                        <button type="button" class="px-6 py-2 text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-md font-medium transition-colors">
+                            Kembali
+                        </button>
+                        <button type="submit" class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md font-medium transition-colors">
+                            Tambah Pasien
+                        </button>
+                    </div>
+                </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const pasien = {
+        nrm: "023778",
+        nik: "3302245811240004",
+        nama: "Agus Santoso",
+        tempatLahir: "Banyumas",
+        tanggalLahir: "2004-06-18",
+        jenisKelamin: "L",
+        pekerjaan: "Dokter",
+        golDarah: "A",
+        penanggungJawab: "Orang Tua",
+        namaPJ: "Sutrisno",
+        pekerjaanPJ: "Guru",
+        noTelpPJ: "08123456789",
+        alamat: "Jl. Sudirman No.1",
+        provinsi: "Jawa Tengah",
+        kabupaten: "Purwokerto",
+        kecamatan: "Purwokerto Selatan",
+        kodePos: "53182",
+        penjamin: "BPJS",
+        nomorBpjs: "0001234567890",
+        caraMasuk: "Rujukan",
+        noRujukan: "1234567890123",
+        catatan: "Alergi obat tertentu"
+        };
+
+        // Prefill
+        document.getElementById('nrm').value = pasien.nrm;
+        document.getElementById('nik').value = pasien.nik;
+        document.getElementById('namaPasien').value = pasien.nama;
+        document.getElementById('tempatLahir').value = pasien.tempatLahir;
+        document.getElementById('tanggalLahir').value = pasien.tanggalLahir;
+        document.querySelector(`input[name="jenisKelamin"][value="${pasien.jenisKelamin}"]`).checked = true;
+        document.getElementById('pekerjaan').value = pasien.pekerjaan;
+        document.getElementById('golonganDarah').value = pasien.golDarah;
+        document.getElementById('penanggungJawab').value = pasien.penanggungJawab;
+        document.getElementById('namaPJ').value = pasien.namaPJ;
+        document.getElementById('pekerjaanPJ').value = pasien.pekerjaanPJ;
+        document.getElementById('noTelpPJ').value = pasien.noTelpPJ;
+        document.getElementById('alamat').value = pasien.alamat;
+        document.getElementById('provinsi').value = pasien.provinsi;
+        document.getElementById('kabupaten').value = pasien.kabupaten;
+        document.getElementById('kecamatan').value = pasien.kecamatan;
+        document.getElementById('kodePos').value = pasien.kodePos;
+        document.getElementById('penjamin').value = pasien.penjamin;
+        handlePenjaminChange(); // panggil biar kolomnya muncul
+        if (pasien.penjamin === 'BPJS') {
+            document.querySelector('[name="nomor_bpjs"]').value = pasien.nomorBpjs;
+        }
+        document.getElementById('caraMasuk').value = pasien.caraMasuk;
+        document.getElementById('noRujukan').value = pasien.noRujukan;
+        document.getElementById('catatanKhusus').value = pasien.catatan;
+    });
+
+    function handlePenjaminChange() {
+        const selected = document.getElementById('penjamin').value;
+
+        document.getElementById('bpjs-fields').classList.add('hidden');
+        document.getElementById('asuransi-fields').classList.add('hidden');
+        document.getElementById('instansi-fields').classList.add('hidden');
+        document.getElementById('jasaraharja-fields').classList.add('hidden');
+
+        if (selected === 'BPJS') {
+            document.getElementById('bpjs-fields').classList.remove('hidden');
+        } else if (selected === 'Asuransi') {
+            document.getElementById('asuransi-fields').classList.remove('hidden');
+        } else if (selected === 'Instansi') {
+            document.getElementById('instansi-fields').classList.remove('hidden');
+        } else if (selected === 'Jasa Raharja') {
+            document.getElementById('jasaraharja-fields').classList.remove('hidden');
+        }
+    }
+    </script>
+
+</body>
+</html>
+
+
+       
+
