@@ -263,13 +263,12 @@
                         </div>
                     </div>
 
-                    <!-- Tombol Aksi -->
                     <div class="flex justify-end space-x-4 pt-6 border-t border-gray-200">
                         <button type="button" class="px-6 py-2 text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-md font-medium transition-colors">
                             Kembali
                         </button>
                         <button type="submit" class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md font-medium transition-colors">
-                            Tambah Pasien
+                            Edit Pasien
                         </button>
                     </div>
                 </form>
@@ -304,7 +303,6 @@
         catatan: "Alergi obat tertentu"
         };
 
-        // Prefill
         document.getElementById('nrm').value = pasien.nrm;
         document.getElementById('nik').value = pasien.nik;
         document.getElementById('namaPasien').value = pasien.nama;
@@ -323,7 +321,7 @@
         document.getElementById('kecamatan').value = pasien.kecamatan;
         document.getElementById('kodePos').value = pasien.kodePos;
         document.getElementById('penjamin').value = pasien.penjamin;
-        handlePenjaminChange(); // panggil biar kolomnya muncul
+        handlePenjaminChange(); 
         if (pasien.penjamin === 'BPJS') {
             document.querySelector('[name="nomor_bpjs"]').value = pasien.nomorBpjs;
         }
@@ -354,7 +352,3 @@
 
 </body>
 </html>
-
-
-       
-

@@ -193,7 +193,7 @@
                                                     </svg>
                                                     Lihat
                                                 </a>
-                                                <a href="#" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" onclick="editPatient('000001')">
+                                                <a href="edit.html" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" onclick="editPatient('000001')">
                                                     <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
                                                         <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/>
                                                     </svg>
@@ -306,142 +306,123 @@
     </div>
     <script>
         const sampleData = [
-            {
-                nrm: "240001",
-                nama: "SITI NURHALIZA",
-                nik: "3309014512850001",
-                tanggalLahir: "05 Desember 1985",
-                tempatLahir: "Pemalang",
-                jenisKelamin: "P",
-                noTelpPJ: "0812-3456-7890",
-                golonganDarah: "A+",
-                statusNikah: "Menikah",
-                pekerjaan: "Ibu Rumah Tangga",
-                catatanKhusus: "Alergi Penisilin",
-                alamat: "Jl. Sudirman No. 123, Pemalang",
-                penanggungJawab: "Suami",
-                namaPJ: "Ahmad Fauzi",
-                pekerjaanPJ: "Karyawan Swasta",
-                penjamin: "BPJS Kesehatan",
-                nama_instansi: "BPJS Kesehatan Cabang Pemalang",
-                nomor_surat: "0001793456789",
-                asalRujukan: "Puskesmas Pemalang I",
-                noRujukan: "001/RUJ/PSK-PML/VII/2025",
-                kunjunganTerakhir: "5 kali kunjungan",
-                layananTerakhir: "Poliklinik Kandungan"
-            }
+        {
+            nrm: "240001",
+            nama: "SITI NURHALIZA",
+            nik: "3309014512850001",
+            tanggalLahir: "05 Desember 1985",
+            tempatLahir: "Pemalang",
+            jenisKelamin: "P",
+            noTelpPJ: "0812-3456-7890",
+            golonganDarah: "A+",
+            statusNikah: "Menikah",
+            pekerjaan: "Ibu Rumah Tangga",
+            catatanKhusus: "Alergi Penisilin",
+            alamat: "Jl. Sudirman No. 123, Pemalang",
+            penanggungJawab: "Suami",
+            namaPJ: "Ahmad Fauzi",
+            pekerjaanPJ: "Karyawan Swasta",
+            penjamin: "BPJS Kesehatan",
+            nama_instansi: "BPJS Kesehatan Cabang Pemalang",
+            nomor_surat: "0001793456789",
+            asalRujukan: "Puskesmas Pemalang I",
+            noRujukan: "001/RUJ/PSK-PML/VII/2025",
+            kunjunganTerakhir: "5 kali kunjungan",
+            layananTerakhir: "Poliklinik Kandungan"
+        }
         ];
+
         let selectedPatientId = null;
 
         function deletePatient(id) {
-            selectedPatientId = id;
-            openModal();
+        selectedPatientId = id;
+        openModal();
         }
 
         function hapusPasien() {
-            if (selectedPatientId) {
+        if (selectedPatientId) {
             const data = JSON.parse(localStorage.getItem("dataPasienList") || "[]");
-
             const updated = data.filter(p => p.nrm !== selectedPatientId);
-
             localStorage.setItem("dataPasienList", JSON.stringify(updated));
-
             closeModal();
-
             location.reload();
-            }
+        }
         }
 
         function openModal() {
-            document.getElementById("popupModal").classList.remove("hidden");
+        document.getElementById("popupModal").classList.remove("hidden");
         }
 
         function closeModal() {
-            document.getElementById("popupModal").classList.add("hidden");
+        document.getElementById("popupModal").classList.add("hidden");
         }
+
         function toggleActionDropdown(button) {
-            const dropdown = button.nextElementSibling;
-            const isOpen = !dropdown.classList.contains("hidden");
+        const dropdown = button.nextElementSibling;
+        const isOpen = !dropdown.classList.contains("hidden");
 
-            
-            document.querySelectorAll('.relative > .absolute').forEach(d => d.classList.add('hidden'));
-
-            
-            if (!isOpen) {
+        document.querySelectorAll('.relative > .absolute').forEach(d => d.classList.add('hidden'));
+        if (!isOpen) {
             dropdown.classList.remove("hidden");
-            }
+        }
         }
 
         document.addEventListener('click', function(event) {
-            const isClickInside = event.target.closest('.relative');
-            if (!isClickInside) {
+        const isClickInside = event.target.closest('.relative');
+        if (!isClickInside) {
             document.querySelectorAll('.relative > .absolute').forEach(d => d.classList.add('hidden'));
-            }
+        }
         });
+
         function showDetailModal(nrm) {
-            // Dalam implementasi asli, gunakan:
-            // const dataList = JSON.parse(localStorage.getItem("dataPasienList") || "[]");
-            const dataList = sampleData;
-            const pasien = dataList.find(p => p.nrm === nrm);
+        const pasien = sampleData.find(p => p.nrm === nrm);
+        if (!pasien) return alert("Data tidak ditemukan");
 
-            if (!pasien) return alert("Data tidak ditemukan");
+        document.getElementById("modalNamaPasien").innerText = "NY. " + pasien.nama;
+        document.getElementById("modalNRM").innerText = pasien.nrm;
+        document.getElementById("modalTerdaftar").innerText = "25 Juni 2017";
+        document.getElementById("modalNIK").innerText = pasien.nik;
+        document.getElementById("modalTglLahir").innerText = pasien.tanggalLahir;
+        document.getElementById("modalTempatLahir").innerText = pasien.tempatLahir;
+        document.getElementById("modalJK").innerText = pasien.jenisKelamin === "L" ? "Laki-laki" : "Perempuan";
+        document.getElementById("modalTelpPJ").innerText = pasien.noTelpPJ || "-";
+        document.getElementById("modalGolDarah").innerText = pasien.golonganDarah || "-";
+        document.getElementById("modalStatusNikah").innerText = pasien.statusNikah || "-";
+        document.getElementById("modalPekerjaan").innerText = pasien.pekerjaan;
+        document.getElementById("modalCatatan").innerText = pasien.catatanKhusus || "-";
+        document.getElementById("modalAlamat").innerText = pasien.alamat;
+        document.getElementById("modalPJ").innerText = pasien.penanggungJawab;
+        document.getElementById("modalNamaPJ").innerText = pasien.namaPJ || "-";
+        document.getElementById("modalPekerjaanPJ").innerText = pasien.pekerjaanPJ || "-";
+        document.getElementById("modalPenjamin").innerText = pasien.penjamin;
+        document.getElementById("modalInstansi").innerText = pasien.nama_instansi || "-";
+        document.getElementById("modalSurat").innerText = pasien.nomor_surat || "-";
+        document.getElementById("modalAsalRujukan").innerText = pasien.asalRujukan || "-";
+        document.getElementById("modalNoRujukan").innerText = pasien.noRujukan || "-";
+        document.getElementById("modalKunjungan").innerText = pasien.kunjunganTerakhir || "-";
+        document.getElementById("modalLayanan").innerText = pasien.layananTerakhir || "-";
 
-            // Isi data modal
-            document.getElementById("modalNamaPasien").innerText = "NY. " + pasien.nama;
-            document.getElementById("modalNRM").innerText = pasien.nrm;
-            document.getElementById("modalTerdaftar").innerText = "25 Juni 2017";
-            document.getElementById("modalNIK").innerText = pasien.nik;
-            document.getElementById("modalTglLahir").innerText = pasien.tanggalLahir;
-            document.getElementById("modalTempatLahir").innerText = pasien.tempatLahir;
-            document.getElementById("modalJK").innerText = pasien.jenisKelamin === "L" ? "Laki-laki" : "Perempuan";
-            document.getElementById("modalTelpPJ").innerText = pasien.noTelpPJ || "-";
-            document.getElementById("modalGolDarah").innerText = pasien.golonganDarah || "-";
-            document.getElementById("modalStatusNikah").innerText = pasien.statusNikah || "-";
-            document.getElementById("modalPekerjaan").innerText = pasien.pekerjaan;
-            document.getElementById("modalCatatan").innerText = pasien.catatanKhusus || "-";
-            document.getElementById("modalAlamat").innerText = pasien.alamat;
-
-            // Kanan
-            document.getElementById("modalPJ").innerText = pasien.penanggungJawab;
-            document.getElementById("modalNamaPJ").innerText = pasien.namaPJ || "-";
-            document.getElementById("modalPekerjaanPJ").innerText = pasien.pekerjaanPJ || "-";
-            document.getElementById("modalPenjamin").innerText = pasien.penjamin;
-            document.getElementById("modalInstansi").innerText = pasien.nama_instansi || "-";
-            document.getElementById("modalSurat").innerText = pasien.nomor_surat || "-";
-            document.getElementById("modalAsalRujukan").innerText = pasien.asalRujukan || "-";
-            document.getElementById("modalNoRujukan").innerText = pasien.noRujukan || "-";
-            document.getElementById("modalKunjungan").innerText = pasien.kunjunganTerakhir || "-";
-            document.getElementById("modalLayanan").innerText = pasien.layananTerakhir || "-";
-
-            // Tampilkan modal
-            document.getElementById("modalDetailPasien").classList.remove("hidden");
-            document.getElementById("modalDetailPasien").classList.add("flex");
-            document.body.style.overflow = 'hidden';
+        document.getElementById("modalDetailPasien").classList.remove("hidden");
+        document.getElementById("modalDetailPasien").classList.add("flex");
+        document.body.style.overflow = 'hidden';
         }
 
         function closeDetailModal() {
-            document.getElementById("modalDetailPasien").classList.remove("flex");
-            document.getElementById("modalDetailPasien").classList.add("hidden");
-            document.body.style.overflow = 'auto';
+        document.getElementById("modalDetailPasien").classList.remove("flex");
+        document.getElementById("modalDetailPasien").classList.add("hidden");
+        document.body.style.overflow = 'auto';
         }
 
-        function openDetailModal() {
-            // Demo function - panggil showDetailModal dengan sample NRM
-            showDetailModal("240001");
-        }
-
-        // Close modal when clicking outside
         document.getElementById('modalDetailPasien').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeDetailModal();
-            }
+        if (e.target === this) {
+            closeDetailModal();
+        }
         });
 
-        // Close modal with Escape key
         document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeDetailModal();
-            }
+        if (e.key === 'Escape') {
+            closeDetailModal();
+        }
         });
     </script>
   </body>
