@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIMRS - Sistem Informasi Manajemen Rumah Sakit</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-blue': '#3b82f6',
+                        'light-blue': '#e0f2fe',
+                        'sidebar-bg': '#f8fafc',
+                        'nav-text': '#64748b'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 font-sans">
+    <header class="bg-white shadow-sm border-b border-gray-200">
+            <div class="flex items-center justify-between px-6 py-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 bg-primary-blue rounded-lg flex items-center justify-center">
+                        <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/>
+                        </svg>
+                    </div>
+                    <h1 class="text-xl font-semibold text-gray-800">SIMRS</h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span class="text-sm text-gray-600">dr. Sho</span>
+                    <div class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center">
+                        <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="flex min-h-screen">
+            <!-- Sidebar -->
+            <aside class="w-64 bg-sidebar-bg border-r border-gray-200">
+                <nav class="p-4">
+                    <!-- Dashboard Section -->
+                    <div class="mb-6">
+                        <div class="flex items-center justify-between py-2 px-3 text-primary-blue bg-light-blue rounded-lg mb-2">
+                            <div class="flex items-center space-x-2">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5a2 2 0 012-2h4a2 2 0 012 2v6a2 2 0 01-2 2H10a2 2 0 01-2-2V5z"/>
+                                </svg>
+                                <span class="text-sm font-medium">Dashboard</span>
+                            </div>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </div>
+                        
+                        <div class="ml-4 space-y-1">
+                            <a href="#" class="block py-2 px-3 text-sm text-nav-text hover:text-gray-800 hover:bg-gray-100 rounded-md">Default</a>
+                            <a href="#" class="block py-2 px-3 text-sm text-nav-text hover:text-gray-800 hover:bg-gray-100 rounded-md">Alternative</a>
+                        </div>
+                    </div>
+
+                    <!-- Riwayat Kunjungan Pasien -->
+                    <div class="mb-6">
+                        <div class="flex items-center justify-between py-2 px-3 text-nav-text hover:text-gray-800 rounded-lg mb-2 cursor-pointer">
+                            <div class="flex items-center space-x-2">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"/>
+                                </svg>
+                                <span class="text-sm font-medium">Riwayat Kunjungan Pasien</span>
+                            </div>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </div>
+                    </div>
+                </nav>
+            </aside>
+
+            <main class="flex-1 p-6">
+            <!-- Breadcrumb -->
+            <nav class="flex items-center space-x-2 text-sm text-gray-500 mb-6">
+                <span>Poli Penyakit Dalam</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+                <span>Data Pasien</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+                <span class="text-gray-800">Anjani Shatila</span>
+            </nav>
+
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6" >
+                <div>
+                        <div class="flex items-center space-x-3">
+                            <h1 class="text-2xl font-semibold text-gray-800">NY. Anjani Shatila</h1>
+                            <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">AMI</span>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-1">NRM: 000009</p>
+                        <p class="text-sm text-gray-500">Tanggal Terdaftar: 25 Juni 2017</p>
+                </div>
+                <span class="p-8"></span>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Column 1 -->
+                    <div class="space-y-4">
+                        <div>
+                            <label class="text-sm text-gray-700 font-bold">No. Reg</label>
+                            <p class="text-sm text-gray-600">PD/000025</p>
+                        </div>
+                        <div>
+                            <label class="text-sm text-gray-700 font-bold">NIK</label>
+                            <p class="text-sm text-gray-600">3374010609990009</p>
+                        </div>
+                        <div>
+                            <label class="text-sm font-bold text-gray-700">Tgl. Lahir / Umur</label>
+                            <p class="text-sm text-gray-600">3 Juni 1978 / 42 Tahun</p>
+                        </div>
+                        <div>
+                            <label class="text-sm font-bold text-gray-700">Jenis Kelamin</label>
+                            <p class="text-sm text-gray-600">Perempuan</p>
+                        </div>
+                        <div>
+                            <label class="text-sm font-bold text-gray-700">Alamat</label>
+                            <p class="text-sm text-gray-600">Jl Pengabdian RT 06 RW 03 No 13, Desa Apahayo, Kecamatan Depok, Kabupaten Sleman, Yogjakarta 51234</p>
+                        </div>
+                    </div>
+
+                    <!-- Column 2 -->
+                    <div class="space-y-4">
+                        <div>
+                            <label class="text-sm font-bold text-gray-700">Dokter PJ</label>
+                            <p class="text-sm text-gray-600">dr. Sho</p>
+                        </div>
+                        <div>
+                            <label class="text-sm font-bold text-gray-700">Jenis</label>
+                            <p class="text-sm text-gray-600">BPJS</p>
+                        </div>
+                        <div>
+                            <label class="text-sm font-bold text-gray-700">Asal Rujukan</label>
+                            <p class="text-sm text-gray-600">Puskesmas Purwokerto Timur</p>
+                        </div>
+                        <div>
+                            <label class="text-sm font-medium text-gray-700">No. Rujukan</label>
+                            <p class="text-sm text-gray-600">1234567890123</p>
+                        </div>
+                        <div>
+                            <label class="text-sm font-bold text-gray-700">No. BPJS / No. SEP</label>
+                            <p class="text-sm text-gray-600">1234567890123 / 1234567890123</p>
+                        </div>
+                        <div>
+                            <label class="text-sm font-bold text-gray-700">Alergi</label>
+                            <p class="text-sm text-gray-600">Ibuprofen</p>
+                        </div>
+                        <div>
+                            <label class="text-sm font-bold text-gray-700">Penyakit Khusus</label>
+                            <p class="text-sm text-gray-600">-</p>
+                        </div>
+                    </div>
+
+                    <!-- Column 3 -->
+                    <div class="space-y-4">
+                        <div>
+                            <label class="text-sm font-bold text-gray-700">Penanggung Jawab</label>
+                            <p class="text-sm text-gray-600">Anjani Shatila</p>
+                        </div>
+                        <div>
+                            <label class="text-sm font-bold text-gray-700">No. Telp PJ</label>
+                            <p class="text-sm text-gray-600">085673456278</p>
+                        </div>
+                        <div>
+                            <label class="text-sm font-bold text-gray-700">Hubungan dengan Pasien</label>
+                            <p class="text-sm text-gray-600">Diri Sendiri</p>
+                        </div>
+                        <div class="text-sm text-gray-500">
+                            * Untuk mengganti data Penanggung Jawab silahkan hubungi pendaftran
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="mb-6 gap-6 text-sm">
+                <div class="bg-white rounded-lg shadow-sm p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-xl font-bold text-gray-900">Data Tindakan</h2>
+                        <a href="tambah-kunjungan.html"><button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2 transition-colors">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                            </svg>
+                            <span>Tambah Tindakan</span>
+                        </button>
+                        </a>
+                    </div>
+
+                    <!-- Filters -->
+                    <div class="mb-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Cari Tindakan / Dokter / Lokasi</label>
+                            <input id="searchInput" type="text" placeholder="Cari" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Tanggal Tindakan</label>
+                            <div class="flex items-center space-x-3">
+                                <div class="relative flex-1">
+                                    <input id="tanggalFilter" type="date" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                    <svg class="absolute right-3 top-3 w-4 h-4 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                    </svg>
+                                </div>
+                                <button id="resetFilterBtn" class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 text-sm">
+                                    Reset
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Table -->
+                    <div class="overflow-x-auto">
+                        <table class="w-full table-auto">
+                            <thead>
+                                <tr class="border-b border-gray-200">
+                                    <th class="text-left py-3 px-4 font-medium text-gray-700">No.</th>
+                                    <th class="text-left py-3 px-4 font-medium text-gray-700">Tanggal Tindakan</th>
+                                    <th class="text-left py-3 px-4 font-medium text-gray-700">Lokasi Pelayanan</th>
+                                    <th class="text-left py-3 px-4 font-medium text-gray-700">Nama Tindakan</th>
+                                    <th class="text-left py-3 px-4 font-medium text-gray-700">Dokter PJ</th>
+                                    <th class="text-left py-3 px-4 font-medium text-gray-700">Catatan Medis</th>
+                                    <th class="text-left py-3 px-4 font-medium text-gray-700">Aksi</th>
+                                    <th class="text-left py-3 px-4 font-medium text-gray-700">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tindakanTable">
+                                <tr class="border-b border-gray-100 hover:bg-gray-50 transition-colors">
+                                    <td class="py-4 px-4">1</td>
+                                    <td class="py-4 px-4">18 Juni 2025</td>
+                                    <td class="py-4 px-4">Poli Umum</td>
+                                    <td class="py-4 px-4">Pemeriksaan Fisik</td>
+                                    <td class="py-4 px-4">dr. Julian Amato</td>
+                                    <td class="py-4 px-4">
+                                        <div class="flex items-center space-x-1">
+                                            <span class="text-sm text-gray-600">Tensi cukup tinggi, Hipertensi</span>
+                                            <button class="text-blue-600 hover:text-blue-800 transition-transform" onclick="toggleDetail(1)">
+                                                <svg id="chevron1" class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        <div id="detail1" class="detail-collapsed mt-2 p-3 bg-gray-50 rounded text-sm">
+                                            <p class="mb-2"><strong>Diagnosis:</strong> Hipertensi Primer (I10)</p>
+                                            <p class="mb-2"><strong>Tekanan Darah:</strong> 160/95 mmHg</p>
+                                            <p class="mb-2"><strong>Nadi:</strong> 88 bpm</p>
+                                            <p class="mb-2"><strong>Suhu:</strong> 36.5°C</p>
+                                            <p class="mb-2"><strong>Resep:</strong> Amlodipine 5mg 1x1, Captopril 25mg 2x1</p>
+                                            <button onclick="openDetailModal(1)" class="text-blue-600 hover:underline">Lihat Detail Lengkap</button>
+                                        </div>
+                                    </td>
+                                    <td class="py-4 px-4 relative">
+                                        <button class="text-blue-600 hover:text-blue-800" onclick="toggleAction(1)">
+                                            <svg id="action1" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                            </svg>
+                                        </button>
+                                        <div id="actionMenu1" class="dropdown-menu absolute right-0 bg-white shadow-lg rounded-lg mt-2 py-2 z-10 min-w-32">
+                                            <a href="#" class="flex items-center px-4 py-2 text-sm text-gray-600 hover:bg-gray-100">
+                                                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>
+                                                    <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/>
+                                                </svg>
+                                                Lihat
+                                            </a>
+                                            <a href="#" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path fill-rule="evenodd" d="M5 4a3 3 0 00-3 3v6a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3H5zm-1 9v-1h5v2H5a1 1 0 01-1-1zm7 1h4a1 1 0 001-1v-1h-5v2zm0-4h5V8h-5v2zM9 8H4v2h5V8z" clip-rule="evenodd"/>
+                                                </svg>
+                                                Print
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td class="py-4 px-4">
+                                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">Dirujuk ke Poli Penyakit Dalam</span>
+                                    </td>
+                                </tr>
+                                <tr class="border-b border-gray-100 hover:bg-gray-50 transition-colors">
+                                    <td class="py-4 px-4">2</td>
+                                    <td class="py-4 px-4">18 Juli 2025</td>
+                                    <td class="py-4 px-4">Poli Penyakit Dalam</td>
+                                    <td class="py-4 px-4">Pemeriksaan Fisik</td>
+                                    <td class="py-4 px-4">dr. Sho</td>
+                                    <td class="py-4 px-4">
+                                        <div class="flex items-center space-x-1">
+                                            <span class="text-sm text-gray-600">Tensi sudah terkontrol</span>
+                                            <button class="text-blue-600 hover:text-blue-800 transition-transform" onclick="toggleDetail(2)">
+                                                <svg id="chevron2" class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        <div id="detail2" class="detail-collapsed mt-2 p-3 bg-gray-50 rounded text-sm">
+                                            <p class="mb-2"><strong>Diagnosis:</strong> Hipertensi Terkontrol</p>
+                                            <p class="mb-2"><strong>Tekanan Darah:</strong> 130/80 mmHg</p>
+                                            <p class="mb-2"><strong>Nadi:</strong> 78 bpm</p>
+                                            <p class="mb-2"><strong>Suhu:</strong> 36.2°C</p>
+                                            <p class="mb-2"><strong>Resep:</strong> Lanjut Amlodipine 5mg 1x1</p>
+                                            <p class="mb-2"><strong>Anjuran:</strong> Kontrol 3 bulan lagi, diet rendah garam</p>
+                                            <button onclick="openDetailModal(2)" class="text-blue-600 hover:underline">Lihat Detail Lengkap</button>
+                                        </div>
+                                    </td>
+                                    <td class="py-4 px-4 relative">
+                                        <button class="text-blue-600 hover:text-blue-800" onclick="toggleAction(2)">
+                                            <svg id="action2" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                            </svg>
+                                        </button>
+                                        <div id="actionMenu2" class="dropdown-menu absolute right-0 bg-white shadow-lg rounded-lg mt-2 py-2 z-10 min-w-32">
+                                            <a href="#" class="flex items-center px-4 py-2 text-sm text-gray-600 hover:bg-gray-100">
+                                                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>
+                                                    <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/>
+                                                </svg>
+                                                Lihat
+                                            </a>
+                                            <a href="edit-kunjungan.html" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/>
+                                                </svg>
+                                                Edit
+                                            </a>
+                                            <a href="#" class="flex items-center px-4 py-2 text-sm text-red-600 hover:bg-red-50">
+                                                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                                                </svg>
+                                                Hapus
+                                            </a>
+                                            <a href="#" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path fill-rule="evenodd" d="M5 4a3 3 0 00-3 3v6a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3H5zm-1 9v-1h5v2H5a1 1 0 01-1-1zm7 1h4a1 1 0 001-1v-1h-5v2zm0-4h5V8h-5v2zM9 8H4v2h5V8z" clip-rule="evenodd"/>
+                                                </svg>
+                                                Print
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td class="py-4 px-4">
+                                        <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Pulang</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="flex items-center justify-center space-x-2 mt-6">
+                        <button class="px-3 py-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                            </svg>
+                        </button>
+                        <button class="px-3 py-2 bg-blue-600 text-white rounded-lg">1</button>
+                        <button class="px-3 py-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal for Detail Pemeriksaan -->
+                <div id="detailModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4 text-sm">
+                    <div class="bg-white rounded-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl relative">
+                        <div class="pt-6 pr-6 pl-6 rounded-t-xl flex justify-between items-center">
+                            <h2 class="text-xl font-semibold">Detail Pemeriksaan</h2>
+                            <button onclick="closeDetailModal()" class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-white hover:bg-opacity-20 transition-colors duration-200 text-2xl">
+                                &times;
+                            </button>
+                        </div>
+                        <div id="modalContent" class="p-6"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script>
+        function toggleDetail(id) {
+            const detail = document.getElementById(`detail${id}`);
+            const chevron = document.getElementById(`chevron${id}`);
+            
+            if (detail.classList.contains('detail-collapsed')) {
+                detail.classList.remove('detail-collapsed');
+                detail.classList.add('detail-expanded');
+                chevron.classList.add('rotate-180');
+            } else {
+                detail.classList.remove('detail-expanded');
+                detail.classList.add('detail-collapsed');
+                chevron.classList.remove('rotate-180');
+            }
+        }
+
+        function toggleAction(id) {
+            const menu = document.getElementById(`actionMenu${id}`);
+            const allMenus = document.querySelectorAll('[id^="actionMenu"]');
+            
+            // Close all other menus
+            allMenus.forEach(m => {
+                if (m.id !== `actionMenu${id}`) {
+                    m.classList.add('hidden');
+                }
+            });
+            
+            menu.classList.toggle('hidden');
+        }
+
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('[onclick^="toggleAction"]') && !event.target.closest('[id^="actionMenu"]')) {
+                const allMenus = document.querySelectorAll('[id^="actionMenu"]');
+                allMenus.forEach(menu => menu.classList.add('hidden'));
+            }
+        });
+
+        // Open detail modal
+        function openDetailModal(id) {
+            const modal = document.getElementById('detailModal');
+            const content = document.getElementById('modalContent');
+            
+            // Sample data based on id
+            const data = {
+                1: {
+                    tanggal: '18 Juni 2025',
+                    lokasi: 'Poli Umum',
+                    tindakan: 'Pemeriksaan Fisik',
+                    dokter: 'dr. Julian Amato',
+                    diagnosis: 'Hipertensi Primer (I10)',
+                    td: '160/95 mmHg',
+                    nadi: '88 bpm',
+                    suhu: '36.5°C',
+                    bb: '75 kg',
+                    tb: '170 cm',
+                    keluhan: 'Sakit kepala, pusing terutama pagi hari',
+                    pemeriksaan: 'Pasien tampak sakit ringan, kesadaran compos mentis',
+                    resep: 'Amlodipine 5mg 1x1, Captopril 25mg 2x1',
+                    anjuran: 'Diet rendah garam, olahraga teratur, kontrol 2 minggu'
+                },
+                2: {
+                    tanggal: '18 Juli 2025',
+                    lokasi: 'Poli Penyakit Dalam',
+                    tindakan: 'Pemeriksaan Fisik',
+                    dokter: 'dr. Sho',
+                    diagnosis: 'Hipertensi Terkontrol',
+                    td: '130/80 mmHg',
+                    nadi: '78 bpm',
+                    suhu: '36.2°C',
+                    bb: '73 kg',
+                    tb: '170 cm',
+                    keluhan: 'Tidak ada keluhan khusus',
+                    pemeriksaan: 'Pasien tampak sehat, tekanan darah terkontrol',
+                    resep: 'Lanjut Amlodipine 5mg 1x1',
+                    anjuran: 'Diet rendah garam, olahraga teratur, kontrol 3 bulan lagi'
+                }
+            };
+
+            const item = data[id];
+            content.innerHTML = `
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <p class="mb-2"><strong>Tanggal:</strong> ${item.tanggal}</p>
+                        <p class="mb-2"><strong>Lokasi:</strong> ${item.lokasi}</p>
+                        <p class="mb-2"><strong>Tindakan:</strong> ${item.tindakan}</p>
+                        <p class="mb-2"><strong>Dokter PJ:</strong> ${item.dokter}</p>
+                        <p class="mb-2"><strong>Diagnosis:</strong> ${item.diagnosis}</p>
+                    </div>
+                    <div>
+                        <p class="mb-2"><strong>Tekanan Darah:</strong> ${item.td}</p>
+                        <p class="mb-2"><strong>Nadi:</strong> ${item.nadi}</p>
+                        <p class="mb-2"><strong>Suhu:</strong> ${item.suhu}</p>
+                        <p class="mb-2"><strong>Berat Badan:</strong> ${item.bb}</p>
+                        <p class="mb-2"><strong>Tinggi Badan:</strong> ${item.tb}</p>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <p class="mb-2"><strong>Keluhan Utama:</strong> ${item.keluhan}</p>
+                    <p class="mb-2"><strong>Pemeriksaan Fisik:</strong> ${item.pemeriksaan}</p>
+                    <p class="mb-2"><strong>Resep Obat:</strong> ${item.resep}</p>
+                    <p class="mb-2"><strong>Anjuran:</strong> ${item.anjuran}</p>
+                </div>
+            `;
+            
+            modal.classList.remove('hidden');
+        }
+
+        // Close detail modal
+        function closeDetailModal() {
+            document.getElementById('detailModal').classList.add('hidden');
+        }
+
+        // Search functionality
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const rows = document.querySelectorAll('#tindakanTable tr');
+            
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                if (text.includes(searchTerm)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+
+        // Date filter
+        document.getElementById('tanggalFilter').addEventListener('change', function(e) {
+            const filterDate = e.target.value;
+            const rows = document.querySelectorAll('#tindakanTable tr');
+            
+            if (!filterDate) return;
+            
+            rows.forEach(row => {
+                const dateCell = row.cells[1];
+                if (dateCell) {
+                    row.style.display = '';
+                }
+            });
+        });
+
+        // Reset filters
+        document.getElementById('resetFilterBtn').addEventListener('click', function() {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('tanggalFilter').value = '';
+            
+            const rows = document.querySelectorAll('#tindakanTable tr');
+            rows.forEach(row => {
+                row.style.display = '';
+            });
+        });
+
+        // Add new tindakan button
+        // document.getElementById('addTindakanBtn').addEventListener('click', function() {
+        //     alert('Fungsi tambah tindakan akan diarahkan ke halaman form');
+        // });
+    </script>
+    
+</body>
+</html>
